@@ -48,7 +48,7 @@ metplus() {
   (
     cd metplus
     pip install -v .
-    cp -v ush/*.py $PREFIX/bin/
+    cp -dv ush/*.py $PREFIX/bin/
     mkdir -pv $PREFIX/etc/
     rsync -av parm/ $PREFIX/etc/metplus/
   )
