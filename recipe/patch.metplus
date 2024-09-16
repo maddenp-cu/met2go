@@ -1,0 +1,15 @@
+*** setup.py	2023-07-31 21:20:56.000000000 +0000
+--- /home/maddenp/METplus-5.1.0/setup.py	2024-09-05 16:43:35.229740640 +0000
+***************
+*** 52 ****
+!     data_files=data_files,
+--- 52,60 ----
+!     include_package_data=True,
+!     package_data={
+!         "metplus": [
+!             "PYTHON_VERSION",
+!             "PYTHON_VERSION_MIN",
+!             "RELEASE_DATE",
+!             "VERSION",
+!         ]
+!     },

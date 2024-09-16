@@ -1,0 +1,24 @@
+#!/bin/bash
+
+miniforge_version=24.3.0-0
+miniforge_fn=Miniforge3-$miniforge_version-Linux-$(uname -p).sh
+miniforge_url=https://github.com/conda-forge/miniforge/releases/download/$miniforge_version/$miniforge_fn
+
+activate() {
+  . conda/etc/profile.d/conda.sh
+  conda activate
+}
+
+test ! $(which curl) && echo "Could not find curl" && exit 1
+
+if [[ ! -d conda ]]; then
+  mkdir -p conda
+  curl -L -o conda/$miniforge_fn $miniforge_url
+  bash conda/$miniforge_fn -bfp conda
+  activate
+  conda install -y anaconda-client conda-build conda-verify
+  conda config --file conda/.condarc --set anaconda_upload yes
+fi
+
+activate
+conda build --error-overlinking recipe

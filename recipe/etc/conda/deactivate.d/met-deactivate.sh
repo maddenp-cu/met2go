@@ -1,0 +1,2 @@
+unset METPLUS_DATA
+unset MET_PYTHON_EXE
