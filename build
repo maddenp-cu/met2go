@@ -21,4 +21,4 @@ if [[ ! -d conda ]]; then
 fi
 
 activate
-conda build --error-overlinking recipe
+make package

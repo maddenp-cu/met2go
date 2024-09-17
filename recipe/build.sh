@@ -51,6 +51,7 @@ metplus() {
     cp -dv ush/*.py $PREFIX/bin/
     mkdir -pv $PREFIX/etc/
     rsync -av parm/ $PREFIX/etc/metplus/
+    rsync -av produtil/ $SP_DIR/produtil/
   )
 }
 
