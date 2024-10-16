@@ -19,8 +19,9 @@ if [[ ! -d conda ]]; then
   bash conda/$miniforge_fn -bfp conda
   activate
   conda install -y anaconda-client conda-build
-  conda config --file conda/.condarc --set anaconda_upload yes
 fi
 
 activate
+test "$ANACONDA_UPLOAD" == no && upload=no || upload=yes
+conda config --file conda/.condarc --set anaconda_upload $upload
 make package
