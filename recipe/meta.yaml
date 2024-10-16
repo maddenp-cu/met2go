@@ -45,7 +45,7 @@ requirements:
     - {{ compiler("cxx") }}
     - {{ compiler("fortran") }}
   host:
-    - _openmp_mutex 4.5
+    - _openmp_mutex 4.5 # [linux]
     - gsl 2.7
     - jasper 4.2.*
     - libnetcdf 4.9.*
@@ -58,6 +58,7 @@ requirements:
     - {{ python }}
     - {{ xarray }}
   run:
+    - blis 0.9.* # [linux64]
     - cartopy 0.21.*
     - imagemagick 7.1.*
     - matplotlib 3.5.*
