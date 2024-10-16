@@ -38,8 +38,9 @@ requirements:
   build:
     - cmake 3.30.*
     - make 4.4.*
-    - pkgconfig 1.5.*
     - pip
+    - pkgconfig 1.5.*
+    - setuptools
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("fortran") }}

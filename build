@@ -1,6 +1,6 @@
 #!/bin/bash
 
-miniforge_version=24.3.0-0
+miniforge_version=24.7.1-2
 miniforge_fn=Miniforge3-$miniforge_version-Linux-$(uname -p).sh
 miniforge_url=https://github.com/conda-forge/miniforge/releases/download/$miniforge_version/$miniforge_fn
 
