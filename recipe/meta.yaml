@@ -1,9 +1,9 @@
-{% set g2c = "nceplibs-g2c 1.9.*" %}
-{% set netcdf4 = "netcdf4 1.7.*" %}
-{% set numpy = "numpy 1.22.*" %}
-{% set pandas = "pandas 2.2.*" %}
-{% set python = "python >=3.10.*" %}
-{% set xarray = "xarray 2023.12.*" %}
+{% set g2c = "nceplibs-g2c 1.9.0.*" %}
+{% set netcdf4 = "netcdf4 1.7.1.*" %}
+{% set numpy = "numpy 1.22.4.*" %}
+{% set pandas = "pandas 2.2.3.*" %}
+{% set python = "python 3.10.15" %}
+{% set xarray = "xarray 2023.12.0.*" %}
 
 package:
   name: metkit
@@ -29,7 +29,6 @@ build:
     - netcdf4
     - numpy
     - pandas
-    - python
     - python-dateutil
     - xarray
   include_recipe: false
@@ -44,13 +43,14 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("fortran") }}
+    - {{ python }}
   host:
     - _openmp_mutex 4.5 # [linux]
     - gsl 2.7
-    - jasper 4.2.*
-    - libnetcdf 4.9.*
-    - libopenblas 0.3.*
-    - zlib 1.3.*
+    - jasper 4.2.4.*
+    - libnetcdf 4.9.2.*
+    - libopenblas 0.3.28.*
+    - zlib 1.3.1.*
     - {{ g2c }}
     - {{ netcdf4 }}
     - {{ numpy }}
@@ -59,10 +59,10 @@ requirements:
     - {{ xarray }}
   run:
     - blis 0.9.* # [linux64]
-    - cartopy 0.21.*
-    - imagemagick 7.1.*
-    - matplotlib 3.5.*
-    - python-dateutil 2.8.*
+    - cartopy 0.21.1.*
+    - imagemagick 7.1.1.*
+    - matplotlib 3.5.2.*
+    - python-dateutil 2.8.2.*
     - {{ g2c }}
     - {{ netcdf4 }}
     - {{ numpy }}

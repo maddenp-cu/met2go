@@ -40,7 +40,6 @@ met() {
     )
     ./configure ${flags[*]}
     make install
-    cp -v $BUILD_PREFIX/lib/libpython3.*.so* $PREFIX/lib/
   )
 }
 
