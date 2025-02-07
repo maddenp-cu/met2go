@@ -40,6 +40,25 @@ met() {
     )
     ./configure ${flags[*]}
     make install
+    mkdir -pv $PREFIX/etc/
+    tar cvjf $PREFIX/etc/met.tar.bz2 data
+  )
+}
+
+metdataio() {
+  (
+    cd metdataio
+    for pkg in METdbLoad METreformat; do
+      rsync -av $pkg/ $SP_DIR/$pkg/
+    done
+    exes=(
+      METreformat/write_stat_ascii.py
+    )
+    mkdir -pv $PREFIX/bin/
+    for exe in ${exes[*]}; do
+      chmod +x $SP_DIR/$exe
+      ln -s $SP_DIR/$exe $PREFIX/bin/
+    done
   )
 }
 
@@ -47,11 +66,12 @@ metplus() {
   (
     cd metplus
     pip install -v .
+    mkdir -pv $PREFIX/bin/
     cp -dv ush/*.py $PREFIX/bin/
     rsync -av metplus/ $SP_DIR/metplus/
     rsync -av produtil/ $SP_DIR/produtil/
     mkdir -pv $PREFIX/etc/
-    rsync -av parm/ $PREFIX/etc/metplus/
+    tar cvjf $PREFIX/etc/metplus.tar.bz2 parm
   )
 }
 
@@ -80,5 +100,6 @@ bufr
 netcdf_cxx
 met
 metplus
+metdataio
 
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/

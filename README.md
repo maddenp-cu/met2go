@@ -40,5 +40,10 @@ conda activate metkit
 
 When the environment is activated, the path to MET (e.g. `grid_stat`) and METplus (e.g. `run_metplus.py`) executables is prepended to `PATH`, and the following environment variables are exported:
 
-`METPLUS_PARM_BASE`: A directory containing the contents of the `parm/` directory from the [METplus](https://metplus.readthedocs.io/en/latest/) distribution.
+`METPLUS_PARM_BASE`: A directory containing the contents of the `parm/` directory from the [METplus](https://dtcenter.org/community-code/metplus) distribution.
+`MET_DATA`: A directory containing the contents of the `data/` directory from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
 `MET_PYTHON_EXE`: The path to the Python interpreter to be used by MET.
+
+In addition to those from MET and METplus, the following executables are available:
+
+- From METdataio: `write_stat_ascii.py`

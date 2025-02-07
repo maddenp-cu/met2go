@@ -1,9 +1,9 @@
-{% set g2c = "nceplibs-g2c 1.9.0.*" %}
-{% set netcdf4 = "netcdf4 1.7.1.*" %}
-{% set numpy = "numpy 1.22.4.*" %}
-{% set pandas = "pandas 2.2.3.*" %}
-{% set python = "python 3.10.15" %}
-{% set xarray = "xarray 2023.12.0.*" %}
+{% set libopenblas = "libopenblas 0.3.*" %}
+{% set nceplibs_g2c = "nceplibs-g2c 1.9.*" %}
+{% set netcdf4 = "netcdf4 1.7.*" %}
+{% set numpy = "numpy 2.2.*" %}
+{% set pandas = "pandas 2.2.*" %}
+{% set xarray = "xarray 2025.1.*" %}
 
 package:
   name: metkit
@@ -15,6 +15,9 @@ source:
   - folder: met
     sha256: d99272c074c60d3011d0e47bede330ae8adc15f64d403480d8216815cbff7e7a
     url: https://github.com/dtcenter/MET/archive/refs/tags/v11.0.3.tar.gz
+  - folder: metdataio
+    sha256: 442ff4b541433aa2886b5ceaf9f1d2e646a7f66427981fff5d7f7fdd75f7eb30
+    url: https://github.com/dtcenter/METdataio/archive/refs/tags/v3.0.0.tar.gz
   - folder: metplus
     patch: patch.metplus
     sha256: e80df2d1059176a453b7991a9f123cb5a187cc7ba7f48a75313b92c7a0e68474
@@ -25,7 +28,6 @@ source:
 build:
   ignore_run_exports:
     - jasper
-    - libopenblas
     - netcdf4
     - numpy
     - pandas
@@ -35,40 +37,40 @@ build:
   number: 0
 requirements:
   build:
-    - cmake 3.30.*
-    - make 4.4.*
+    - cmake
+    - make
     - pip
-    - pkgconfig 1.5.*
+    - pkgconfig
+    - python
     - setuptools
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("fortran") }}
-    - {{ python }}
   host:
-    - _openmp_mutex 4.5 # [linux]
-    - gsl 2.7
-    - jasper 4.2.4.*
-    - libnetcdf 4.9.2.*
-    - libopenblas 0.3.28.*
-    - zlib 1.3.1.*
-    - {{ g2c }}
+    - _openmp_mutex # [linux]
+    - gsl 2.8
+    - jasper 4.2.*
+    - libnetcdf 4.9.*
+    - python
+    - zlib 1.3.*
+    - {{ libopenblas }}
+    - {{ nceplibs_g2c }}
     - {{ netcdf4 }}
     - {{ numpy }}
     - {{ pandas }}
-    - {{ python }}
     - {{ xarray }}
   run:
-    - blis 0.9.* # [linux64]
-    - cartopy 0.21.1.*
-    - imagemagick 7.1.1.*
-    - matplotlib 3.5.2.*
-    - python-dateutil 2.8.2.*
-    - {{ g2c }}
+    - cartopy
+    - imagemagick
+    - matplotlib
+    - python
+    - python-dateutil
+    - {{ libopenblas }}
+    - {{ nceplibs_g2c }}
     - {{ netcdf4 }}
     - {{ numpy }}
     - {{ pandas }}
-    - {{ python }}
     - {{ xarray }}
 about:
-  home: FIXME
+  home: https://github.com/maddenp/metkit
   license: APACHE

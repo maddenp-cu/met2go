@@ -1,2 +1,3 @@
 unset METPLUS_PARM_BASE
+unset MET_DATA
 unset MET_PYTHON_EXE
