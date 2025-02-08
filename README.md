@@ -44,6 +44,7 @@ When the environment is activated, the path to MET (e.g. `grid_stat`) and METplu
 `MET_DATA`: A directory containing the contents of the `data/` directory from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
 `MET_PYTHON_EXE`: The path to the Python interpreter to be used by MET.
 
-In addition to those from MET and METplus, the following executables are available:
+In addition, the following scripts are available as executables on `PATH`:
 
 - From METdataio: `write_stat_ascii.py`
+- From METplotpy: `line.py`

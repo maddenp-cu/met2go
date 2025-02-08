@@ -15,9 +15,15 @@ source:
   - folder: met
     sha256: d99272c074c60d3011d0e47bede330ae8adc15f64d403480d8216815cbff7e7a
     url: https://github.com/dtcenter/MET/archive/refs/tags/v11.0.3.tar.gz
+  - folder: metcalcpy
+    sha256: 41ad136683152265df80e27af49bac27e0d8d06606d1201aa1ffe215552640bf
+    url: https://github.com/dtcenter/METcalcpy/archive/refs/tags/v3.0.0.tar.gz
   - folder: metdataio
     sha256: 442ff4b541433aa2886b5ceaf9f1d2e646a7f66427981fff5d7f7fdd75f7eb30
     url: https://github.com/dtcenter/METdataio/archive/refs/tags/v3.0.0.tar.gz
+  - folder: metplotpy
+    sha256: 50a04a06a9bcb7583e1923a94c578436a15adc2cd5a5242a0566992785e89bce
+    url: https://github.com/dtcenter/METplotpy/archive/refs/tags/v3.0.0.tar.gz
   - folder: metplus
     patch: patch.metplus
     sha256: e80df2d1059176a453b7991a9f123cb5a187cc7ba7f48a75313b92c7a0e68474
@@ -63,8 +69,10 @@ requirements:
     - cartopy
     - imagemagick
     - matplotlib
+    - plotly >=6.0
     - python
     - python-dateutil
+    - pyyaml >=6.0
     - {{ libopenblas }}
     - {{ nceplibs_g2c }}
     - {{ netcdf4 }}

@@ -45,17 +45,40 @@ met() {
   )
 }
 
+metcalcpy() {
+  (
+    cd metcalcpy
+    rsync -av metcalcpy/ $SP_DIR/metcalcpy/
+  )
+}
+
 metdataio() {
   (
     cd metdataio
     for pkg in METdbLoad METreformat; do
       rsync -av $pkg/ $SP_DIR/$pkg/
     done
+    mkdir -pv $PREFIX/bin/
     exes=(
       METreformat/write_stat_ascii.py
     )
-    mkdir -pv $PREFIX/bin/
     for exe in ${exes[*]}; do
+      chmod +x $SP_DIR/$exe
+      ln -s $SP_DIR/$exe $PREFIX/bin/
+    done
+  )
+}
+
+metplotpy() {
+  (
+    cd metplotpy
+    rsync -av metplotpy/ $SP_DIR/metplotpy/
+    mkdir -pv $PREFIX/bin/
+    exes=(
+      metplotpy/plots/line/line.py
+    )
+    for exe in ${exes[*]}; do
+      sed -i '1s@^@#!/usr/bin/env python\n@' $SP_DIR/$exe
       chmod +x $SP_DIR/$exe
       ln -s $SP_DIR/$exe $PREFIX/bin/
     done
@@ -100,6 +123,8 @@ bufr
 netcdf_cxx
 met
 metplus
+metcalcpy
 metdataio
+metplotpy
 
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
