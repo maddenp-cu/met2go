@@ -72,7 +72,9 @@ requirements:
     - plotly >=6.0
     - python
     - python-dateutil
+    - python-kaleido >=0.2
     - pyyaml >=6.0
+    - scipy >=1.15
     - {{ libopenblas }}
     - {{ nceplibs_g2c }}
     - {{ netcdf4 }}
