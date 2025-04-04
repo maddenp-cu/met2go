@@ -1,4 +1,4 @@
-# metkit
+# met2go
 
 A conda recipe for [MET](https://met.readthedocs.io/en/latest/) and [METplus](https://metplus.readthedocs.io/en/latest/)
 
@@ -13,19 +13,19 @@ To build a package and optionally upload to anaconda.org:
 
 ## Install
 
-To create a `metkit` virtual environment based on a package uploaded to anaconda.org, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
+To create a `met2go` virtual environment based on a package uploaded to anaconda.org, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
 
 ``` bash
-conda create -n metkit -c <channel> metkit[=version]
+conda create -n met2go -c <channel> met2go[=version]
 ```
 
 Set `<channel>` to the name of the channel corresponding to the credentials you supplied during the build.
 
-To create a `metkit` virtual environment based on the locally built package:
+To create a `met2go` virtual environment based on the locally built package:
 
 ``` bash
 . conda/etc/profile.d/conda.sh
-conda create -n metkit -c local metkit[=version]
+conda create -n met2go -c local met2go[=version]
 ```
 
 In either case, you may optionally provide desired [version](https://docs.anaconda.com/working-with-conda/packages/install-packages/#installing-specific-versions-of-conda-packages) information; otherwise, conda will install the latest available version.
@@ -33,7 +33,7 @@ In either case, you may optionally provide desired [version](https://docs.anacon
 Activate the environment:
 
 ``` bash
-conda activate metkit
+conda activate met2go
 ```
 
 ## Run

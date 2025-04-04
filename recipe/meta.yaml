@@ -6,7 +6,7 @@
 {% set xarray = "xarray 2025.1.*" %}
 
 package:
-  name: metkit
+  name: met2go
   version: 11.0.3
 source:
   - folder: bufr
@@ -82,5 +82,5 @@ requirements:
     - {{ pandas }}
     - {{ xarray }}
 about:
-  home: https://github.com/maddenp/metkit
+  home: https://github.com/maddenp/met2go
   license: APACHE
