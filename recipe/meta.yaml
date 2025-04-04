@@ -43,7 +43,7 @@ build:
   number: 0
 requirements:
   build:
-    - cmake
+    - cmake 3.*
     - make
     - pip
     - pkgconfig
