@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -eu
+
+url_metbase=https://github.com/dtcenter/MET/archive/refs/tags/v11.0.3.tar.gz # <METBASE_URL> # replaced during package build
+url_metplus=https://github.com/dtcenter/METplus/archive/refs/tags/v5.1.0.tar.gz # <METPLUS_URL> # replaced during package build
+
+get() {
+  (
+    mkdir -pv $2
+    set -x
+    curl -LSs $1 | tar xvz --strip-components=2 -C $2 $3
+  )
+}
+
+ver() {
+  echo $1 | sed -E 's@^.*/v([0-9]+\.[0-9]+\.[0-9]+).*@\1@'
+}
+
+get $url_metbase $MET_DATA MET-$(ver $url_metbase)/data/
+get $url_metplus $METPLUS_PARM_BASE METplus-$(ver $url_metplus)/parm/

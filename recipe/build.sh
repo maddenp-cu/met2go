@@ -41,7 +41,6 @@ met() {
     ./configure ${flags[*]}
     make install
     mkdir -pv $PREFIX/etc/
-    tar cvjf $PREFIX/etc/met.tar.bz2 data
   )
 }
 
@@ -94,7 +93,6 @@ metplus() {
     rsync -av metplus/ $SP_DIR/metplus/
     rsync -av produtil/ $SP_DIR/produtil/
     mkdir -pv $PREFIX/etc/
-    tar cvjf $PREFIX/etc/metplus.tar.bz2 parm
   )
 }
 
