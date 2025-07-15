@@ -46,6 +46,7 @@ build:
 requirements:
   build:
     - cmake 3.*
+    - curl
     - make
     - pip
     - pkgconfig
@@ -69,7 +70,6 @@ requirements:
     - {{ xarray }}
   run:
     - cartopy
-    - curl
     - imagemagick
     - matplotlib
     - plotly >=6.0

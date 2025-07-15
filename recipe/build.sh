@@ -27,7 +27,7 @@ datascript() {
     args=(
       -e "s/<METBASE_URL>.*/$metbase_url/"
       -e "s/<METPLUS_URL>/$metplus_url/"
-      $RECIPE_DIR/met2go-data
+      $RECIPE_DIR/datascript
     )
     sed ${args[*]} >$outfile
     chmod +x $outfile
