@@ -18,6 +18,22 @@ bufr() {
   )
 }
 
+datascript() {
+  (
+    metbase_url=$(jq -r .metbase $RECIPE_DIR/urls.json)
+    metplus_url=$(jq -r .metplus $RECIPE_DIR/urls.json)
+    outfile=$PREFIX/bin/met2go-data
+    mkdir -pv $(dirname $outfile)
+    args=(
+      -e "s/<METBASE_URL>.*/$metbase_url/"
+      -e "s/<METPLUS_URL>/$metplus_url/"
+      $RECIPE_DIR/met2go-data
+    )
+    sed ${args[*]} >$outfile
+    chmod +x $outfile
+  )
+}
+
 met() {
   (
     set -eux
