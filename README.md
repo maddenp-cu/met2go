@@ -17,7 +17,7 @@ With the `met2go` environment activated, the path to MET (e.g. `grid_stat`) and 
 - `MET_DATA`: A directory containing<sup>*</sup> the contents of the `data/` directory from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
 - `MET_PYTHON_EXE`: The path to the Python interpreter to be used by MET.
 
-\* The `METPLUS_PARM_BASE` and `MET_DATA` directories are initially empty when a `met2go` environment is created. To populate them, run the `met2go-data` script in the activated `met2go` environment.
+\* The `METPLUS_PARM_BASE` and `MET_DATA` directories do not exist immediately after a `met2go` environment is created. To create and populate them, run `met2go-data` in the activated `met2go` environment.
 
 In addition, the following scripts are available as executables on `PATH`:
 
