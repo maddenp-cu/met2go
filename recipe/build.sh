@@ -25,8 +25,8 @@ datascript() {
     outfile=$PREFIX/bin/met2go-data
     mkdir -pv $(dirname $outfile)
     args=(
-      -e "s/<METBASE_URL>.*/$metbase_url/"
-      -e "s/<METPLUS_URL>/$metplus_url/"
+      -e "s@<METBASE_URL>.*@$metbase_url@"
+      -e "s@<METPLUS_URL>.*@$metplus_url@"
       $RECIPE_DIR/datascript
     )
     sed ${args[*]} >$outfile
