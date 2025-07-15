@@ -1,6 +1,6 @@
 # met2go
 
-A conda recipe for [MET](https://met.readthedocs.io/en/latest/) and [METplus](https://metplus.readthedocs.io/en/latest/)
+A conda recipe for [MET](https://met.readthedocs.io/en/latest/) and select [METplus](https://metplus.readthedocs.io/en/latest/) components.
 
 ## Quick Start
 
