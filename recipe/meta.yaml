@@ -69,6 +69,7 @@ requirements:
     - {{ xarray }}
   run:
     - cartopy
+    - curl
     - imagemagick
     - matplotlib
     - plotly >=6.0
