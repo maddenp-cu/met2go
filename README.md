@@ -37,7 +37,7 @@ To build a package and optionally upload to your own anaconda.org account:
 
 ### Install
 
-To create a `met2go` virtual environment based on a package uploaded to anaconda.org, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
+To create a `met2go` virtual environment based on a package uploaded to your own anaconda.org channel, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
 
 ``` bash
 conda create -n met2go -c <channel> met2go[=version]
