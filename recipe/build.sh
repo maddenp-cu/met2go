@@ -20,7 +20,10 @@ bufr() {
 
 cleanup() {
   (
-    for path in $(find $PREFIX/lib -type f -name "*.a" | sort); do
+    rm -rv $PREFIX/include_*_DA
+    incfiles="$(find $PREFIX/include -type f)"
+    libfiles="$(find $PREFIX/lib -type f -name "*.a")"
+    for path in $incfiles $libfiles; do
       relative=$(echo $path | sed "s@^$PREFIX/@@")
       grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
     done
