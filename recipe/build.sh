@@ -54,13 +54,13 @@ met() {
     export MET_PYTHON_CC=$(python3-config --cflags)
     export MET_PYTHON_LD=$(python3-config --ldflags --embed)
     flags=(
-      --datarootdir=/dev/null # do not install data files
       --enable-grib2
       --enable-python
       --prefix=$PREFIX
     )
     ./configure ${flags[*]}
     make install
+    rm -vr $PREFIX/share/met # remove data
     mkdir -pv $PREFIX/etc/
   )
 }
