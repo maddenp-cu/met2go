@@ -47,6 +47,7 @@ requirements:
   build:
     - cmake 3.*
     - curl
+    - jq
     - make
     - pip
     - pkgconfig
