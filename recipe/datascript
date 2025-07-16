@@ -2,7 +2,6 @@
 
 set -eu
 
-url_metbase=<METBASE_URL> # replaced during package build
 url_metplus=<METPLUS_URL> # replaced during package build
 
 get() {
@@ -17,5 +16,5 @@ ver() {
   echo $1 | sed -E 's@^.*/v([0-9]+\.[0-9]+\.[0-9]+).*@\1@'
 }
 
-get $url_metbase $MET_DATA MET-$(ver $url_metbase)/data/
+echo Installing METplus data:
 get $url_metplus $METPLUS_PARM_BASE METplus-$(ver $url_metplus)/parm/

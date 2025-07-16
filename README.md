@@ -14,10 +14,10 @@ conda activate met2go
 With the `met2go` environment activated, the path to MET (e.g. `grid_stat`) and METplus (e.g. `run_metplus.py`) executables is prepended to `PATH`, and the following environment variables are exported:
 
 - `METPLUS_PARM_BASE`: A directory containing<sup>*</sup> the contents of the `parm/` directory from the [METplus](https://dtcenter.org/community-code/metplus) distribution.
-- `MET_DATA`: A directory containing<sup>*</sup> the contents of the `data/` directory from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
+- `MET_DATA`: A directory containing various runtime data from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
 - `MET_PYTHON_EXE`: The path to the Python interpreter to be used by MET.
 
-\* The `METPLUS_PARM_BASE` and `MET_DATA` directories do not exist immediately after a `met2go` environment is created. To create and populate them, run `met2go-data` in the activated `met2go` environment.
+\* The `METPLUS_PARM_BASE` directory does not exist immediately after `met2go` is installed. To create and populate it, run `met2go-data` in the activated `met2go` environment. This requires write permissions on the conda-environment directory under which `met2go` is installed.
 
 In addition, the following scripts are available as executables on `PATH`:
 

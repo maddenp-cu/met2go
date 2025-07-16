@@ -18,14 +18,24 @@ bufr() {
   )
 }
 
+cleanup() {
+  (
+    rm -rv $PREFIX/include_*_DA
+    incfiles="$(find $PREFIX/include -type f)"
+    libfiles="$(find $PREFIX/lib -type f -name "*.a")"
+    for path in $incfiles $libfiles; do
+      relative=$(echo $path | sed "s@^$PREFIX/@@")
+      grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
+    done
+  )
+}
+
 datascript() {
   (
-    metbase_url=$(jq -r .metbase $RECIPE_DIR/urls.json)
     metplus_url=$(jq -r .metplus $RECIPE_DIR/urls.json)
     outfile=$PREFIX/bin/met2go-data
     mkdir -pv $(dirname $outfile)
     args=(
-      -e "s@<METBASE_URL>.*@$metbase_url@"
       -e "s@<METPLUS_URL>.*@$metplus_url@"
       $RECIPE_DIR/datascript
     )
@@ -56,7 +66,6 @@ met() {
     )
     ./configure ${flags[*]}
     make install
-    mkdir -pv $PREFIX/etc/
   )
 }
 
@@ -108,7 +117,6 @@ metplus() {
     cp -dv ush/*.py $PREFIX/bin/
     rsync -av metplus/ $SP_DIR/metplus/
     rsync -av produtil/ $SP_DIR/produtil/
-    mkdir -pv $PREFIX/etc/
   )
 }
 
@@ -141,5 +149,7 @@ metcalcpy
 metdataio
 metplotpy
 datascript
+cleanup
 
+mkdir -pv $PREFIX/etc
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
