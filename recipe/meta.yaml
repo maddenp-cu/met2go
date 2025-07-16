@@ -5,6 +5,8 @@
 {% set pandas = "pandas 2.2.*" %}
 {% set xarray = "xarray 2025.1.*" %}
 
+{% set urls = load_file_data("urls.json", from_recipe_dir=True) %}
+
 package:
   name: met2go
   version: 11.0.3
@@ -14,7 +16,7 @@ source:
     url: https://github.com/NOAA-EMC/NCEPLIBS-bufr/archive/refs/tags/bufr_v11.4.0.tar.gz
   - folder: met
     sha256: d99272c074c60d3011d0e47bede330ae8adc15f64d403480d8216815cbff7e7a
-    url: https://github.com/dtcenter/MET/archive/refs/tags/v11.0.3.tar.gz
+    url: {{ urls["metbase"] }}
   - folder: metcalcpy
     sha256: 41ad136683152265df80e27af49bac27e0d8d06606d1201aa1ffe215552640bf
     url: https://github.com/dtcenter/METcalcpy/archive/refs/tags/v3.0.0.tar.gz
@@ -27,7 +29,7 @@ source:
   - folder: metplus
     patch: patch.metplus
     sha256: e80df2d1059176a453b7991a9f123cb5a187cc7ba7f48a75313b92c7a0e68474
-    url: https://github.com/dtcenter/METplus/archive/refs/tags/v5.1.0.tar.gz
+    url: {{ urls["metplus"] }}
   - folder: netcdf-cxx
     sha256: e3fe3d2ec06c1c2772555bf1208d220aab5fee186d04bd265219b0bc7a978edc
     url: https://github.com/Unidata/netcdf-cxx4/archive/refs/tags/v4.3.1.tar.gz
@@ -44,6 +46,8 @@ build:
 requirements:
   build:
     - cmake 3.*
+    - curl
+    - jq
     - make
     - pip
     - pkgconfig

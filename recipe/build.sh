@@ -18,6 +18,22 @@ bufr() {
   )
 }
 
+datascript() {
+  (
+    metbase_url=$(jq -r .metbase $RECIPE_DIR/urls.json)
+    metplus_url=$(jq -r .metplus $RECIPE_DIR/urls.json)
+    outfile=$PREFIX/bin/met2go-data
+    mkdir -pv $(dirname $outfile)
+    args=(
+      -e "s@<METBASE_URL>.*@$metbase_url@"
+      -e "s@<METPLUS_URL>.*@$metplus_url@"
+      $RECIPE_DIR/datascript
+    )
+    sed ${args[*]} >$outfile
+    chmod +x $outfile
+  )
+}
+
 met() {
   (
     set -eux
@@ -41,7 +57,6 @@ met() {
     ./configure ${flags[*]}
     make install
     mkdir -pv $PREFIX/etc/
-    tar cvjf $PREFIX/etc/met.tar.bz2 data
   )
 }
 
@@ -94,7 +109,6 @@ metplus() {
     rsync -av metplus/ $SP_DIR/metplus/
     rsync -av produtil/ $SP_DIR/produtil/
     mkdir -pv $PREFIX/etc/
-    tar cvjf $PREFIX/etc/metplus.tar.bz2 parm
   )
 }
 
@@ -126,5 +140,6 @@ metplus
 metcalcpy
 metdataio
 metplotpy
+datascript
 
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
