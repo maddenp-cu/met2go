@@ -28,7 +28,7 @@ In addition, the following scripts are available as executables on `PATH`:
 
 ### Build
 
-To build a package and optionally upload to your own anaconda.org account:
+To build a package and optionally upload to your own anaconda.org channel:
 
 1. Clone this repo on an `aarch64` or `x86_64` Linux system. The built package will match the system architecture.
 2. Run `./build`, which will by default upload the package to anaconda.org. To disable upload, run `ANACONDA_UPLOAD=no ./build`.
