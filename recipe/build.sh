@@ -19,21 +19,20 @@ bufr() {
 }
 
 cleanup() {
-  local path relative
-  for path in $(find $PREFIX/lib -type f -name "*.a" | sort); do
-    relative=$(echo $path | sed "s@^$PREFIX/@@")
-    grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
-  done
+  (
+    for path in $(find $PREFIX/lib -type f -name "*.a" | sort); do
+      relative=$(echo $path | sed "s@^$PREFIX/@@")
+      grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
+    done
+  )
 }
 
 datascript() {
   (
-    metbase_url=$(jq -r .metbase $RECIPE_DIR/urls.json)
     metplus_url=$(jq -r .metplus $RECIPE_DIR/urls.json)
     outfile=$PREFIX/bin/met2go-data
     mkdir -pv $(dirname $outfile)
     args=(
-      -e "s@<METBASE_URL>.*@$metbase_url@"
       -e "s@<METPLUS_URL>.*@$metplus_url@"
       $RECIPE_DIR/datascript
     )
@@ -58,14 +57,12 @@ met() {
     export MET_PYTHON_CC=$(python3-config --cflags)
     export MET_PYTHON_LD=$(python3-config --ldflags --embed)
     flags=(
-      --datarootdir=$PREFIX/../discard # do not package data
       --enable-grib2
       --enable-python
       --prefix=$PREFIX
     )
     ./configure ${flags[*]}
     make install
-    mkdir -pv $PREFIX/etc/
   )
 }
 
@@ -117,7 +114,6 @@ metplus() {
     cp -dv ush/*.py $PREFIX/bin/
     rsync -av metplus/ $SP_DIR/metplus/
     rsync -av produtil/ $SP_DIR/produtil/
-    mkdir -pv $PREFIX/etc/
   )
 }
 
@@ -152,4 +148,5 @@ metplotpy
 datascript
 cleanup
 
+mkdir -pv $PREFIX/etc
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/

@@ -16,7 +16,7 @@ source:
     url: https://github.com/NOAA-EMC/NCEPLIBS-bufr/archive/refs/tags/bufr_v11.4.0.tar.gz
   - folder: met
     sha256: d99272c074c60d3011d0e47bede330ae8adc15f64d403480d8216815cbff7e7a
-    url: {{ urls["metbase"] }}
+    url: https://github.com/dtcenter/MET/archive/refs/tags/v11.0.3.tar.gz
   - folder: metcalcpy
     sha256: 41ad136683152265df80e27af49bac27e0d8d06606d1201aa1ffe215552640bf
     url: https://github.com/dtcenter/METcalcpy/archive/refs/tags/v3.0.0.tar.gz
@@ -52,6 +52,7 @@ requirements:
     - pip
     - pkgconfig
     - python
+    - rsync
     - setuptools
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
