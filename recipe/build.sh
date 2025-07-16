@@ -18,6 +18,10 @@ bufr() {
   )
 }
 
+cleanup() {
+  find $PREFIX/lib -type f -name "*.a" | sort | xargs rm -v
+}
+
 datascript() {
   (
     metbase_url=$(jq -r .metbase $RECIPE_DIR/urls.json)
@@ -142,5 +146,6 @@ metcalcpy
 metdataio
 metplotpy
 datascript
+cleanup
 
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
