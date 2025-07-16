@@ -18,7 +18,7 @@ if [[ ! -d conda ]]; then
   curl -L -o conda/$miniforge_fn $miniforge_url
   bash conda/$miniforge_fn -bfp conda
   activate
-  conda install -y anaconda-client conda-build jq
+  conda install -y anaconda-client conda-build
 fi
 
 activate
