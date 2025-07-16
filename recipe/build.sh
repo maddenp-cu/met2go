@@ -19,7 +19,11 @@ bufr() {
 }
 
 cleanup() {
-  find $PREFIX/lib -type f -name "*.a" | sort | xargs rm -v
+  local path relative
+  for path in $(find $PREFIX/lib -type f -name "*.a" | sort); do
+    relative=$(echo $path | sed "s@^$PREFIX/@@")
+    grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
+  done
 }
 
 datascript() {
@@ -54,13 +58,13 @@ met() {
     export MET_PYTHON_CC=$(python3-config --cflags)
     export MET_PYTHON_LD=$(python3-config --ldflags --embed)
     flags=(
+      --datarootdir=$PREFIX/../discard # do not package data
       --enable-grib2
       --enable-python
       --prefix=$PREFIX
     )
     ./configure ${flags[*]}
     make install
-    rm -vr $PREFIX/share/met # remove data
     mkdir -pv $PREFIX/etc/
   )
 }
