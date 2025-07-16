@@ -140,5 +140,6 @@ metplus
 metcalcpy
 metdataio
 metplotpy
+datascript
 
 rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
