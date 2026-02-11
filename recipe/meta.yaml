@@ -3,7 +3,7 @@
 {% set netcdf4 = "netcdf4 1.7.*" %}
 {% set numpy = "numpy 2.2.*" %}
 {% set pandas = "pandas 2.2.*" %}
-{% set xarray = "xarray 2025.1.*" %}
+{% set xarray = "xarray 2025.12.*" %}
 
 {% set urls = load_file_data("urls.json", from_recipe_dir=True) %}
 
@@ -42,7 +42,7 @@ build:
     - python-dateutil
     - xarray
   include_recipe: false
-  number: 0
+  number: 1
 requirements:
   build:
     - cmake 3.*
