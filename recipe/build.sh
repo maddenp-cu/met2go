@@ -141,6 +141,8 @@ netcdf_cxx() {
 
 set -eux
 
+conda list
+
 bufr
 netcdf_cxx
 met
