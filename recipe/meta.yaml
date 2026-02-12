@@ -61,7 +61,7 @@ requirements:
     - _openmp_mutex # [linux]
     - gsl 2.8
     - jasper 4.2.*
-    - libnetcdf 4.9.*
+    - libnetcdf 4.9.2.*
     - python
     - zlib 1.3.*
     - {{ libopenblas }}
