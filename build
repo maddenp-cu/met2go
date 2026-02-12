@@ -13,15 +13,15 @@ activate() {
 
 test ! $(which curl) && echo "Could not find curl" && exit 1
 
-if [[ ! -d conda ]]; then
+if [[ -d conda ]]; then
+  activate
+else
   mkdir -p conda
-  curl -L -o conda/$miniforge_fn $miniforge_url
+  curl --location --show-error --silent --output conda/$miniforge_fn $miniforge_url
   bash conda/$miniforge_fn -bfp conda
   activate
-  conda install -y anaconda-client conda-build
+  conda install --yes conda-build
+  conda config --file conda/.condarc --set anaconda_upload no
 fi
 
-activate
-test "$ANACONDA_UPLOAD" == no && upload=no || upload=yes
-conda config --file conda/.condarc --set anaconda_upload $upload
 make package

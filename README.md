@@ -28,16 +28,14 @@ In addition, the following scripts are available as executables on `PATH`:
 
 ### Build
 
-To build a package and optionally upload to your own anaconda.org channel:
-
-1. Clone this repo on an `aarch64` or `x86_64` Linux system. The built package will match the system architecture.
-2. Run `./build`, which will by default upload the package to anaconda.org. To disable upload, run `ANACONDA_UPLOAD=no ./build`.
-3. If prompted, enter your anaconda.org credentials for package upload.
-4. When finished, you may remove the `conda` directory created by `build` to reclaim disk space. But if you disabled package upload in step 2 above and want to create a virtual environment based on the local package, retain the `conda` directory.
+1. Clone this repo on a Linux `aarch64` or `x86_64` system.
+2. In the clone root, run `./build`. The resulting package will match the system architecture.
+3. Copy the built conda package elsewhere or [upload](https://www.anaconda.com/docs/tools/anaconda-org/maintainer-guide/upload-packages) to your anaconda.org channel.
+4. When finished, you may remove the `conda` directory created by `build` to reclaim disk space.
 
 ### Install
 
-To create a `met2go` virtual environment based on a package uploaded to your own anaconda.org channel, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
+To create a `met2go` virtual environment based on a package uploaded to your anaconda.org channel, activate your conda ([Miniforge](https://github.com/conda-forge/miniforge/releases) recommended), then:
 
 ``` bash
 conda create -n met2go -c <channel> met2go[=version]
