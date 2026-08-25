@@ -1,6 +1,6 @@
 # met2go
 
-A conda recipe for [MET](https://met.readthedocs.io/en/latest/) and select [METplus](https://metplus.readthedocs.io/en/latest/) components.
+A conda recipe for [MET](https://met.readthedocs.io/en/latest/).
 
 ## Quick Start
 
@@ -11,18 +11,10 @@ conda create -n met2go -c paul.madden met2go
 conda activate met2go
 ```
 
-With the `met2go` environment activated, the path to MET (e.g. `grid_stat`) and METplus (e.g. `run_metplus.py`) executables is prepended to `PATH`, and the following environment variables are exported:
+With the `met2go` environment activated, the path to MET (e.g. `grid_stat`) executables is prepended to `PATH`, and the following environment variables are exported:
 
-- `METPLUS_PARM_BASE`: A directory containing<sup>*</sup> the contents of the `parm/` directory from the [METplus](https://dtcenter.org/community-code/metplus) distribution.
 - `MET_DATA`: A directory containing various runtime data from the [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) distribution.
 - `MET_PYTHON_EXE`: The path to the Python interpreter to be used by MET.
-
-\* The `METPLUS_PARM_BASE` directory does not exist immediately after `met2go` is installed. To create and populate it, run `met2go-data` in the activated `met2go` environment. This requires write permissions on the conda-environment directory under which `met2go` is installed.
-
-In addition, the following scripts are available as executables on `PATH`:
-
-- From METdataio: `write_stat_ascii.py`
-- From METplotpy: `line.py`
 
 ## Development
 

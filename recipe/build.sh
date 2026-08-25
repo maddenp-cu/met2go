@@ -30,20 +30,6 @@ cleanup() {
   )
 }
 
-datascript() {
-  (
-    metplus_url=$(jq -r .metplus $RECIPE_DIR/urls.json)
-    outfile=$PREFIX/bin/met2go-data
-    mkdir -pv $(dirname $outfile)
-    args=(
-      -e "s@<METPLUS_URL>.*@$metplus_url@"
-      $RECIPE_DIR/datascript
-    )
-    sed ${args[*]} >$outfile
-    chmod +x $outfile
-  )
-}
-
 met() {
   (
     set -eux
@@ -150,7 +136,6 @@ metplus
 metcalcpy
 metdataio
 metplotpy
-datascript
 cleanup
 
 mkdir -pv $PREFIX/etc
