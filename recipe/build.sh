@@ -126,17 +126,19 @@ netcdf_cxx() {
 }
 
 set -eux
+cd met
+chmod 644 *
+chmod +x compile_MET_all.sh
+wget -nv https://github.com/dtcenter/MET/archive/refs/tags/v12.2.1.tar.gz
+sha256sum --check $RECIPE_DIR/checksum
+exit 1
 
-conda list
+# conda list
+# 
+# bufr
+# netcdf_cxx
+# met
+# cleanup
 
-bufr
-netcdf_cxx
-met
-metplus
-metcalcpy
-metdataio
-metplotpy
-cleanup
-
-mkdir -pv $PREFIX/etc
-rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
+# mkdir -pv $PREFIX/etc
+# rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
