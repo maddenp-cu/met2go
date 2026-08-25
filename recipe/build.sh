@@ -126,12 +126,9 @@ netcdf_cxx() {
 }
 
 set -eux
-script=$SRC_DIR/compile_MET_all.sh
-chmod +x $script
-tar czf tar_files/$MET_TARBALL MET-12.2.1
-# $script
-
-exit 1
-
-mkdir -pv $PREFIX/etc
-rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
+d=MET-12.2.1
+tar czf tar_files/$MET_TARBALL $d
+rm -rf $d
+bash compile_MET_all.sh
+# mkdir -pv $PREFIX/etc
+# rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/

@@ -24,4 +24,5 @@ else
   conda config --file conda/.condarc --set anaconda_upload no
 fi
 
-make package
+# conda build --error-overlinking recipe
+conda build --error-overlinking --build-only --dirty recipe
