@@ -14,20 +14,25 @@ source:
 #     sha256: 946482405e675b99e8e0c221d137768f246076f5e9ba92eed6cae47fb68b7a26
 #     url: https://github.com/NOAA-EMC/NCEPLIBS-bufr/archive/refs/tags/bufr_v11.4.0.tar.gz
 
-  - folder: met
+  - folder: tar_files
     sha256: 3ad18c37dabf185ea97839a8093cebbfa7e6a2ba7ab92081a0a797f6d5181d8f
     url: https://dtcenter.ucar.edu/dfiles/code/METplus/MET/installation/tar_files.tgz
-#   - folder: met
-#     sha256: 8c3d426df4c9b932c1853518085f9f0d5fda0df076bb5adebc88901a828f308f
-#     url: https://github.com/dtcenter/MET/archive/refs/tags/v12.2.1.tar.gz
-  - folder: met
-    sha256: 77995e73593d8e006aeef21fe30d21192e3bf9814f1bb9d7bcd58cbbf4cc1c04
+  - folder: MET-12.2.1
+    sha256: 8c3d426df4c9b932c1853518085f9f0d5fda0df076bb5adebc88901a828f308f
+    url: https://github.com/dtcenter/MET/archive/refs/tags/v12.2.1.tar.gz
+  - sha256: 77995e73593d8e006aeef21fe30d21192e3bf9814f1bb9d7bcd58cbbf4cc1c04
     url: https://raw.githubusercontent.com/dtcenter/MET/refs/heads/main_v12.2/internal/scripts/installation/compile_MET_all.sh
 
 #   - folder: netcdf-cxx
 #     sha256: e3fe3d2ec06c1c2772555bf1208d220aab5fee186d04bd265219b0bc7a978edc
 #     url: https://github.com/Unidata/netcdf-cxx4/archive/refs/tags/v4.3.1.tar.gz
 build:
+  script_env:
+    - COMPILER=gnu
+    - MET_SUBDIR=$SRC_DIR
+    - MET_TARBALL=met.tgz
+    - TEST_BASE=$SRC_DIR
+    - USE_MODULES=FALSE
 #   ignore_run_exports:
 #     - jasper
 #     - netcdf4
@@ -50,8 +55,8 @@ requirements:
 #     - setuptools
     - wget
     - {{ compiler("c") }}
-#     - {{ compiler("cxx") }}
-#     - {{ compiler("fortran") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("fortran") }}
 #   host:
 #     - _openmp_mutex # [linux]
 #     - gsl 2.8
