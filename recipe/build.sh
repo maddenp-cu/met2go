@@ -125,9 +125,17 @@
 #   )
 # }
 
-set -eux
+export COMPILER=gnu
+export MET_SUBDIR=$SRC_DIR
+export MET_TARBALL=met.tgz
+export MET_UNPACKED=MET-$VERSION
+export TEST_BASE=$SRC_DIR
+export USE_MODULES=FALSE
 tar czf tar_files/$MET_TARBALL $MET_UNPACKED
 rm -rf $MET_UNPACKED
-bash compile_MET_all.sh
+curl -sSl https://raw.githubusercontent.com/dtcenter/MET/refs/tags/v$VERSION/internal/scripts/installation/compile_MET_all.sh >install
+chmod u+x install
+./install
+#bash install
 # mkdir -pv $PREFIX/etc
 # rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/

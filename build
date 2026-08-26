@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 declare -A os=(["GNU/Linux"]="Linux" ["Darwin"]="MacOSX")
 
 miniforge_version=26.5.3-0
@@ -10,6 +12,8 @@ activate() {
   . conda/etc/profile.d/conda.sh
   conda activate
 }
+
+apt update && apt install -y curl # PM FIXME
 
 test ! $(which curl) && echo "Could not find curl" && exit 1
 
@@ -24,5 +28,6 @@ else
   conda config --file conda/.condarc --set anaconda_upload no
 fi
 
-# conda build --error-overlinking recipe
+export PYTHONWARNINGS="ignore:The environment variable:UserWarning:conda_build.environ"
+conda build purge
 conda build --error-overlinking --build-only --dirty recipe
