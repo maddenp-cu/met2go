@@ -1,134 +1,133 @@
-exec 2>&1
-
-bufr() {
-  (
-    set -eux
-    cd bufr
-    mkdir -pv build
-    cd build
-    flags=(
-      -DENABLE_TESTS=OFF
-      -DCMAKE_INSTALL_PREFIX=$PREFIX
-      -DCMAKE_MAKE_PROGRAM=$(which make)
-      -Wno-dev
-    )
-    cmake ${flags[*]} ..
-    make -j
-    make install
-  )
-}
-
-cleanup() {
-  (
-    rm -rv $PREFIX/include_*_DA
-    incfiles="$(find $PREFIX/include -type f)"
-    libfiles="$(find $PREFIX/lib -type f -name "*.a")"
-    for path in $incfiles $libfiles; do
-      relative=$(echo $path | sed "s@^$PREFIX/@@")
-      grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
-    done
-  )
-}
-
-met() {
-  (
-    set -eux
-    cd met
-    export BUFRLIB_NAME=-lbufr_4_DA
-    export GRIB2CLIB_NAME=-lg2c
-    export MET_BUFR=$PREFIX
-    export MET_GRIB2CINC=$PREFIX
-    export MET_GRIB2CLIB=$PREFIX
-    export MET_GSL=$PREFIX
-    export MET_HDF5=$PREFIX
-    export MET_NETCDF=$PREFIX
-    export MET_PYTHON_BIN_EXE=$PYTHON
-    export MET_PYTHON_CC=$(python3-config --cflags)
-    export MET_PYTHON_LD=$(python3-config --ldflags --embed)
-    flags=(
-      --enable-grib2
-      --enable-python
-      --prefix=$PREFIX
-    )
-    ./configure ${flags[*]}
-    make install
-  )
-}
-
-metcalcpy() {
-  (
-    cd metcalcpy
-    rsync -av metcalcpy/ $SP_DIR/metcalcpy/
-  )
-}
-
-metdataio() {
-  (
-    cd metdataio
-    for pkg in METdbLoad METreformat; do
-      rsync -av $pkg/ $SP_DIR/$pkg/
-    done
-    mkdir -pv $PREFIX/bin/
-    exes=(
-      METreformat/write_stat_ascii.py
-    )
-    for exe in ${exes[*]}; do
-      chmod +x $SP_DIR/$exe
-      ln -s $SP_DIR/$exe $PREFIX/bin/
-    done
-  )
-}
-
-metplotpy() {
-  (
-    cd metplotpy
-    rsync -av metplotpy/ $SP_DIR/metplotpy/
-    mkdir -pv $PREFIX/bin/
-    exes=(
-      metplotpy/plots/line/line.py
-    )
-    for exe in ${exes[*]}; do
-      sed -i '1s@^@#!/usr/bin/env python\n@' $SP_DIR/$exe
-      chmod +x $SP_DIR/$exe
-      ln -s $SP_DIR/$exe $PREFIX/bin/
-    done
-  )
-}
-
-metplus() {
-  (
-    cd metplus
-    pip install -v .
-    mkdir -pv $PREFIX/bin/
-    cp -dv ush/*.py $PREFIX/bin/
-    rsync -av metplus/ $SP_DIR/metplus/
-    rsync -av produtil/ $SP_DIR/produtil/
-  )
-}
-
-netcdf_cxx() {
-  (
-    set -eux
-    cd netcdf-cxx
-    mkdir -pv build
-    cd build
-    flags=(
-      -DBUILD_TESTING=OFF
-      -DCMAKE_INSTALL_PREFIX=$PREFIX
-      -DCMAKE_MAKE_PROGRAM=$(which make)
-      -Wno-dev
-    )
-    cmake ${flags[*]} ..
-    make -j
-    make install
-    ln -s $PREFIX/lib/libnetcdf-cxx4.so $PREFIX/lib/libnetcdf_c++4.so
-  )
-}
+# exec 2>&1
+# 
+# bufr() {
+#   (
+#     set -eux
+#     cd bufr
+#     mkdir -pv build
+#     cd build
+#     flags=(
+#       -DENABLE_TESTS=OFF
+#       -DCMAKE_INSTALL_PREFIX=$PREFIX
+#       -DCMAKE_MAKE_PROGRAM=$(which make)
+#       -Wno-dev
+#     )
+#     cmake ${flags[*]} ..
+#     make -j
+#     make install
+#   )
+# }
+# 
+# cleanup() {
+#   (
+#     rm -rv $PREFIX/include_*_DA
+#     incfiles="$(find $PREFIX/include -type f)"
+#     libfiles="$(find $PREFIX/lib -type f -name "*.a")"
+#     for path in $incfiles $libfiles; do
+#       relative=$(echo $path | sed "s@^$PREFIX/@@")
+#       grep -q "^$relative$" $PREFIX/../prefix_files.txt || rm -v $path
+#     done
+#   )
+# }
+# 
+# met() {
+#   (
+#     set -eux
+#     cd met
+#     export BUFRLIB_NAME=-lbufr_4_DA
+#     export GRIB2CLIB_NAME=-lg2c
+#     export MET_BUFR=$PREFIX
+#     export MET_GRIB2CINC=$PREFIX
+#     export MET_GRIB2CLIB=$PREFIX
+#     export MET_GSL=$PREFIX
+#     export MET_HDF5=$PREFIX
+#     export MET_NETCDF=$PREFIX
+#     export MET_PYTHON_BIN_EXE=$PYTHON
+#     export MET_PYTHON_CC=$(python3-config --cflags)
+#     export MET_PYTHON_LD=$(python3-config --ldflags --embed)
+#     flags=(
+#       --enable-grib2
+#       --enable-python
+#       --prefix=$PREFIX
+#     )
+#     ./configure ${flags[*]}
+#     make install
+#   )
+# }
+# 
+# metcalcpy() {
+#   (
+#     cd metcalcpy
+#     rsync -av metcalcpy/ $SP_DIR/metcalcpy/
+#   )
+# }
+# 
+# metdataio() {
+#   (
+#     cd metdataio
+#     for pkg in METdbLoad METreformat; do
+#       rsync -av $pkg/ $SP_DIR/$pkg/
+#     done
+#     mkdir -pv $PREFIX/bin/
+#     exes=(
+#       METreformat/write_stat_ascii.py
+#     )
+#     for exe in ${exes[*]}; do
+#       chmod +x $SP_DIR/$exe
+#       ln -s $SP_DIR/$exe $PREFIX/bin/
+#     done
+#   )
+# }
+# 
+# metplotpy() {
+#   (
+#     cd metplotpy
+#     rsync -av metplotpy/ $SP_DIR/metplotpy/
+#     mkdir -pv $PREFIX/bin/
+#     exes=(
+#       metplotpy/plots/line/line.py
+#     )
+#     for exe in ${exes[*]}; do
+#       sed -i '1s@^@#!/usr/bin/env python\n@' $SP_DIR/$exe
+#       chmod +x $SP_DIR/$exe
+#       ln -s $SP_DIR/$exe $PREFIX/bin/
+#     done
+#   )
+# }
+# 
+# metplus() {
+#   (
+#     cd metplus
+#     pip install -v .
+#     mkdir -pv $PREFIX/bin/
+#     cp -dv ush/*.py $PREFIX/bin/
+#     rsync -av metplus/ $SP_DIR/metplus/
+#     rsync -av produtil/ $SP_DIR/produtil/
+#   )
+# }
+# 
+# netcdf_cxx() {
+#   (
+#     set -eux
+#     cd netcdf-cxx
+#     mkdir -pv build
+#     cd build
+#     flags=(
+#       -DBUILD_TESTING=OFF
+#       -DCMAKE_INSTALL_PREFIX=$PREFIX
+#       -DCMAKE_MAKE_PROGRAM=$(which make)
+#       -Wno-dev
+#     )
+#     cmake ${flags[*]} ..
+#     make -j
+#     make install
+#     ln -s $PREFIX/lib/libnetcdf-cxx4.so $PREFIX/lib/libnetcdf_c++4.so
+#   )
+# }
 
 set -eux
-d=MET-12.2.1
-tar czf tar_files/$MET_TARBALL $d
-rm -rf $d
+tar czf tar_files/$MET_TARBALL $MET_UNPACKED
+rm -rf $MET_UNPACKED
 bash compile_MET_all.sh
 # mkdir -pv $PREFIX/etc
 # rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/
