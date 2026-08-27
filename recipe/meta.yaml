@@ -20,6 +20,12 @@ source:
 #     url: https://github.com/Unidata/netcdf-cxx4/archive/refs/tags/v4.3.1.tar.gz
 build:
   script_env:
+    - COMPILER=gnu
+    - MET_SUBDIR=$SRC_DIR
+    - MET_TARBALL=met.tgz
+    - MET_UNPACKED=MET-{{ version }}
+    - TEST_BASE=$SRC_DIR
+    - USE_MODULES=FALSE
     - VERSION={{ version }}
 #   ignore_run_exports:
 #     - jasper
@@ -32,18 +38,19 @@ build:
   number: 1
 requirements:
   build:
-#     - cmake 3.*
+    - cmake 3.*
+    - m4
+    - make
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("fortran") }}
 #     - curl
 #     - jq
-#     - make
 #     - pip
 #     - pkgconfig
 #     - python
 #     - rsync
 #     - setuptools
-    - {{ compiler("c") }}
-    - {{ compiler("cxx") }}
-    - {{ compiler("fortran") }}
 #   host:
 #     - _openmp_mutex # [linux]
 #     - gsl 2.8
