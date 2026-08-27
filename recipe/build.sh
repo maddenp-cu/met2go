@@ -125,12 +125,10 @@
 #   )
 # }
 
+export TAR_OPTIONS="--no-same-owner --no-same-permissions" # PM FIXME
 tar czf tar_files/$MET_TARBALL $MET_UNPACKED
 rm -rf $MET_UNPACKED
 curl -sSl https://raw.githubusercontent.com/dtcenter/MET/refs/tags/v$VERSION/internal/scripts/installation/compile_MET_all.sh >install
-chmod u+x install
-export TAR_OPTIONS="--no-same-owner --no-same-permissions"
-./install
-#bash install
+bash install
 # mkdir -pv $PREFIX/etc
 # rsync -av $RECIPE_DIR/etc/ $PREFIX/etc/

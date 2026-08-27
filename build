@@ -13,12 +13,12 @@ activate() {
   conda activate
 }
 
+apt update && apt install -y curl # PM FIXME
+
 if [[ -d conda ]]; then
   activate
 else
   mkdir -p conda
-  apt update && apt install -y curl # PM FIXME
-  test ! $(which curl) && echo "Could not find curl" && exit 1
   curl --location --show-error --silent --output conda/$miniforge_fn $miniforge_url
   bash conda/$miniforge_fn -bfp conda
   activate
