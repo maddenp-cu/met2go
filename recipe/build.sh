@@ -126,6 +126,9 @@
 # }
 
 export TAR_OPTIONS="--no-same-owner --no-same-permissions" # PM FIXME
+mkdir -pv external_libs
+rsync -av $BUILD_PREFIX/include/ external_libs/include/
+rsync -av $BUILD_PREFIX/lib/ external_libs/lib/
 tar czf tar_files/$MET_TARBALL $MET_UNPACKED
 rm -rf $MET_UNPACKED
 curl -sSl https://raw.githubusercontent.com/dtcenter/MET/refs/tags/v$VERSION/internal/scripts/installation/compile_MET_all.sh >install
